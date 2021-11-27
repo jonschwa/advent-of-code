@@ -1,11 +1,11 @@
-package main
+package year2015
 
 import (
 	"fmt"
 	"jonschwa/aoc/helpers"
 )
 
-func main() {
+func RunDay1() {
 	data, err := helpers.GetDataForDay(2015, 1)
 	if err != nil {
 		fmt.Println("Error fetching data:", err)

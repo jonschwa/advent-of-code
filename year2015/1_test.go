@@ -1,4 +1,4 @@
-package main
+package year2015
 
 import (
 	"testing"
