@@ -36,6 +36,30 @@ func (g *Gift) calculateAreas() {
 	g.minArea = minArea
 }
 
+func (g *Gift) getRequiredRibbon() int {
+	sides := []int{g.l, g.h, g.w}
+	maxIdx := 0
+	biggestSide := 0
+
+	// iterate, get the idx we want to pop (man this sucks in golang)
+	for i, size := range sides {
+		if i == 0 || size > biggestSide {
+			biggestSide = size
+			maxIdx = i
+		}
+	}
+
+	// get the two smallest sides and calc perimeter
+	sides[maxIdx] = sides[len(sides)-1] // Copy last element to index i.
+	sides[len(sides)-1] = 0             // Erase last element (write zero value).
+	minSides := sides[:len(sides)-1]    // new slice = truncated slice
+
+	perimeter := (minSides[0] + minSides[1]) * 2
+	volume := g.l * g.w * g.h
+	requiredRibbon := perimeter + volume
+	return requiredRibbon
+}
+
 func createGift(dimensions []string) Gift {
 	l, err := strconv.Atoi(dimensions[0])
 	if err != nil {
@@ -77,5 +101,12 @@ func solveDay2Part1(data []string) int {
 }
 
 func solveDay2Part2(data []string) int {
-	return 0
+	totalRibbonNeeded := 0
+	for _, dim := range data {
+		dimensions := strings.Split(dim, "x")
+		gift := createGift(dimensions)
+		gift.calculateAreas()
+		totalRibbonNeeded += gift.getRequiredRibbon()
+	}
+	return totalRibbonNeeded
 }
