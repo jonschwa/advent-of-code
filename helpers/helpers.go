@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 )
 
 func GetDataForDay(year int, day int) ([]string, error) {
@@ -20,4 +21,16 @@ func GetDataForDay(year int, day int) ([]string, error) {
 		lines = append(lines, scanner.Text())
 	}
 	return lines, scanner.Err()
+}
+
+func ConvertStringSliceToIntSlice(strings []string) []int {
+	var err error
+	intData := make([]int, len(strings))
+	for i, v := range strings {
+		intData[i], err = strconv.Atoi(v)
+		if err != nil {
+			panic("unable to convert!")
+		}
+	}
+	return intData
 }
