@@ -4,14 +4,14 @@ import (
 	"testing"
 )
 
-type testCase struct {
+type testCaseDay1 struct {
 	input    []int
 	expected int
 }
 
 func TestDay1Part1(t *testing.T) {
 
-	var testCases = []testCase{
+	var testCases = []testCaseDay1{
 		{[]int{199, 200, 208, 210, 200, 207, 240, 269, 260, 263}, 7},
 	}
 
@@ -23,8 +23,8 @@ func TestDay1Part1(t *testing.T) {
 	}
 }
 
-func TestDay2Part2(t *testing.T) {
-	var testCases = []testCase{
+func TestDay1Part2(t *testing.T) {
+	var testCases = []testCaseDay1{
 		{[]int{199, 200, 208, 210, 200, 207, 240, 269, 260, 263}, 5},
 	}
 
