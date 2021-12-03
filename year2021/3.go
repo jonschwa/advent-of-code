@@ -130,7 +130,7 @@ func solveDay3Part2(data []string) int64 {
 	o2Data := make([]string, len(data))
 	co2Data := make([]string, len(data))
 
-	// making copies because data is a value type, and gets mutated in the recursive functions above,
+	// making copies because data is a reference type, and gets mutated in the recursive functions above,
 	// which is v annoying. TODO - there must be a more idiomatic way to do this
 	copy(o2Data, data)
 	copy(co2Data, data)
