@@ -129,16 +129,8 @@ func filterBitsByCriteria(idx int, data []string, ratingType string) string {
 }
 
 func solveDay3Part2(data []string) int64 {
-	o2Data := make([]string, len(data))
-	co2Data := make([]string, len(data))
-
-	// making copies because data is a reference type, and gets mutated in the recursive functions above,
-	// which is v annoying. TODO - there must be a more idiomatic way to do this
-	copy(o2Data, data)
-	copy(co2Data, data)
-
-	o2Rating := filterBitsByCriteria(0, o2Data, "o2")
-	co2Rating := filterBitsByCriteria(0, co2Data, "co2")
+	o2Rating := filterBitsByCriteria(0, data, "o2")
+	co2Rating := filterBitsByCriteria(0, data, "co2")
 
 	o2Int, err := strconv.ParseInt(o2Rating, 2, 64)
 	if err != nil {
