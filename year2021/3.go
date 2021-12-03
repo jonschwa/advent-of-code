@@ -101,8 +101,10 @@ func getBitCriteria(idx int, data []string, ratingType string) int {
 }
 
 func getUpdatedData(idx int, bitCriteria int, data []string) []string {
-	newData := data[:0]
-	for _, chars := range data {
+	cpy := make([]string, len(data))
+	copy(cpy, data)
+	newData := cpy[:0]
+	for _, chars := range cpy {
 		intChar, err := strconv.Atoi(string(chars[idx]))
 		if err != nil {
 			panic(err)
