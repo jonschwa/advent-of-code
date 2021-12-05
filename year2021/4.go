@@ -27,7 +27,6 @@ func (b *BoardRun) CallNumber(number int) int {
 			}
 			// did we win?
 			if numHitInCol[j] == 5 || numHitInRow[i] == 5 {
-				// fmt.Println(b.numbersCalled)
 				b.score = b.Score(number)
 				return b.score
 			}
