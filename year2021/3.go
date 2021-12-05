@@ -10,10 +10,7 @@ type BitCriteria [2]int
 type Container []BitCriteria
 
 func RunDay3() {
-	data, err := helpers.GetDataForDay(2021, 3)
-	if err != nil {
-		fmt.Println("Error fetching data:", err)
-	}
+	data := helpers.GetDataForDay(2021, 3)
 
 	fmt.Println("Part 1:", solveDay3Part1(data))
 	fmt.Println("Part 2:", solveDay3Part2(data))

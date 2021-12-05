@@ -54,10 +54,7 @@ func convertLinesToCommands(data []string) []Command {
 }
 
 func RunDay2() {
-	data, err := helpers.GetDataForDay(2021, 2)
-	if err != nil {
-		fmt.Println("Error fetching data:", err)
-	}
+	data := helpers.GetDataForDay(2021, 2)
 
 	commands := convertLinesToCommands(data)
 	fmt.Println("Part 1:", solveDay2Part1(commands))

@@ -6,10 +6,7 @@ import (
 )
 
 func RunDay1() {
-	data, err := helpers.GetDataForDay(2015, 1)
-	if err != nil {
-		fmt.Println("Error fetching data:", err)
-	}
+	data := helpers.GetDataForDay(2015, 1)
 	fmt.Println("Part 1:", solveDay1Part1(data[0]))
 	fmt.Println("Part 2:", solveDay1Part2(data[0]))
 

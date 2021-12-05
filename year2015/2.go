@@ -79,10 +79,7 @@ func createGift(dimensions []string) Gift {
 }
 
 func RunDay2() {
-	data, err := helpers.GetDataForDay(2015, 2)
-	if err != nil {
-		fmt.Println("Error fetching data:", err)
-	}
+	data := helpers.GetDataForDay(2015, 2)
 	fmt.Println("Part 1:", solveDay2Part1(data))
 	fmt.Println("Part 2:", solveDay2Part2(data))
 

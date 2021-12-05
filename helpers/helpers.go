@@ -1,26 +1,25 @@
 package helpers
 
 import (
-	"bufio"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strconv"
+	"strings"
 )
 
-func GetDataForDay(year int, day int) ([]string, error) {
-	filename := fmt.Sprintf("data/%d/%d.txt", year, day)
-	file, err := os.Open(filename)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
+func GetDataForDay(year int, day int) []string {
+	fileName := fmt.Sprintf("data/%d/%d.txt", year, day)
 
-	var lines []string
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
+	fileBytes, err := ioutil.ReadFile(fileName)
+
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
 	}
-	return lines, scanner.Err()
+
+	sliceData := strings.Split(string(fileBytes), "\n")
+	return sliceData
 }
 
 func ConvertStringSliceToIntSlice(strings []string) []int {
