@@ -27,6 +27,66 @@ func (g Grid) Print() {
 	}
 }
 
+func (g Grid) drawHorizontalLine(line Line) {
+	var start int
+	var end int
+	if line.origin.y < line.endpoint.y {
+		start = line.origin.y
+		end = line.endpoint.y
+	} else {
+		start = line.endpoint.y
+		end = line.origin.y
+	}
+	for i := start; i <= end; i++ {
+		g[i][line.origin.x]++
+	}
+}
+
+func (g Grid) drawVerticalLine(line Line) {
+	var start int
+	var end int
+	if line.origin.x < line.endpoint.x {
+		start = line.origin.x
+		end = line.endpoint.x
+	} else {
+		start = line.endpoint.x
+		end = line.origin.x
+	}
+	for i := start; i <= end; i++ {
+		g[line.origin.y][i]++
+	}
+}
+
+func (g Grid) drawDiagonalLine(line Line) {
+	var dX int
+	var dY int
+
+	if line.origin.x < line.endpoint.x {
+		dX = 1
+	} else {
+		dX = -1
+	}
+
+	if line.origin.y < line.endpoint.y {
+		dY = 1
+	} else {
+		dY = -1
+	}
+
+	yVal := line.origin.y
+	if dX > 0 {
+		for i := line.origin.x; i <= line.endpoint.x; i++ {
+			g[yVal][i]++
+			yVal += dY
+		}
+	} else {
+		for i := line.origin.x; i >= line.endpoint.x; i-- {
+			g[yVal][i]++
+			yVal += dY
+		}
+	}
+}
+
 // for a line, get the max X/Y Coordinates for grid sizing
 func (l Line) getMaxCoords() (int, int) {
 	var maxX int
@@ -96,34 +156,9 @@ func solveDay5Part1(data []string) int {
 	for _, line := range lines {
 		// For now, only consider horizontal and vertical lines: lines where either x1 = x2 or y1 = y2.
 		if line.origin.x == line.endpoint.x {
-			// draw a horizontal line
-			var start int
-			var end int
-			if line.origin.y < line.endpoint.y {
-				start = line.origin.y
-				end = line.endpoint.y
-			} else {
-				start = line.endpoint.y
-				end = line.origin.y
-			}
-			for i := start; i <= end; i++ {
-				grid[i][line.origin.x]++
-			}
-
+			grid.drawHorizontalLine(line)
 		} else if line.origin.y == line.endpoint.y {
-			// draw a vertical line
-			var start int
-			var end int
-			if line.origin.x < line.endpoint.x {
-				start = line.origin.x
-				end = line.endpoint.x
-			} else {
-				start = line.endpoint.x
-				end = line.origin.x
-			}
-			for i := start; i <= end; i++ {
-				grid[line.origin.y][i]++
-			}
+			grid.drawVerticalLine(line)
 		}
 	}
 
@@ -145,62 +180,12 @@ func solveDay5Part2(data []string) int {
 	for _, line := range lines {
 		// Because of the limits of the hydrothermal vent mapping system, the lines in your list will only ever be horizontal, vertical,
 		// or a diagonal line at exactly 45 degrees (slope +-1)
-		var start int
-		var end int
 		if line.origin.x == line.endpoint.x {
-			// draw a horizontal line
-			if line.origin.y < line.endpoint.y {
-				start = line.origin.y
-				end = line.endpoint.y
-			} else {
-				start = line.endpoint.y
-				end = line.origin.y
-			}
-			for i := start; i <= end; i++ {
-				grid[i][line.origin.x]++
-			}
-
+			grid.drawHorizontalLine(line)
 		} else if line.origin.y == line.endpoint.y {
-			// draw a vertical line
-			if line.origin.x < line.endpoint.x {
-				start = line.origin.x
-				end = line.endpoint.x
-			} else {
-				start = line.endpoint.x
-				end = line.origin.x
-			}
-			for i := start; i <= end; i++ {
-				grid[line.origin.y][i]++
-			}
+			grid.drawVerticalLine(line)
 		} else {
-			// draw a diagonal line
-			var dX int
-			var dY int
-
-			if line.origin.x < line.endpoint.x {
-				dX = 1
-			} else {
-				dX = -1
-			}
-
-			if line.origin.y < line.endpoint.y {
-				dY = 1
-			} else {
-				dY = -1
-			}
-
-			yVal := line.origin.y
-			if dX > 0 {
-				for i := line.origin.x; i <= line.endpoint.x; i++ {
-					grid[yVal][i]++
-					yVal += dY
-				}
-			} else {
-				for i := line.origin.x; i >= line.endpoint.x; i-- {
-					grid[yVal][i]++
-					yVal += dY
-				}
-			}
+			grid.drawDiagonalLine(line)
 		}
 	}
 	// find places where more than 2 lines intersect
