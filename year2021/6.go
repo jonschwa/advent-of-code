@@ -69,25 +69,15 @@ func getNextDay(fish []LanternFish) []LanternFish {
 	return nextDay
 }
 
-func createFishAgeMap(data []int) map[int]int {
-	fishMap := map[int]int{
-		0: 0,
-		1: 0,
-		2: 0,
-		3: 0,
-		4: 0,
-		5: 0,
-		6: 0,
-		7: 0,
-		8: 0,
-	}
+func createFishAgeMap(data []int) [9]int {
+	var fishMap [9]int
 	for _, age := range data {
 		fishMap[age]++
 	}
 	return fishMap
 }
 
-func updateFishAgeMap(fishMap map[int]int) map[int]int {
+func updateFishAgeMap(fishMap [9]int) [9]int {
 	// these fish are done and going to become 6s and 8s
 	completedFish := fishMap[0]
 	for i := 0; i < 8; i++ {
