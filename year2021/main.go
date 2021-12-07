@@ -7,6 +7,7 @@ func RunDay(day int) {
 		3: RunDay3,
 		4: RunDay4,
 		5: RunDay5,
+		6: RunDay6,
 	}
 
 	handlers[day]()

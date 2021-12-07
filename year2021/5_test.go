@@ -47,10 +47,6 @@ func TestDay5Part2(t *testing.T) {
 			"0,0 -> 8,8",
 			"5,5 -> 8,2",
 		}, 12},
-		// {[]string{
-		// 	"1,1 -> 3,3",
-		// 	"9,7 -> 7,9",
-		// }, 12},
 	}
 
 	for _, testCase := range testCases {
