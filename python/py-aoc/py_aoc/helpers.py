@@ -17,3 +17,12 @@ def read_file_to_list(datapath, strip=True):
     if strip:
         return [line.strip() for line in file_list]
     return file_list
+
+def fetch_data(path) -> list:
+    return read_file_to_list(path)
+
+def get_data(year: int, day: int) -> list[list, list]:
+    test_data = fetch_data(f'{year}/day{day}/test.txt')
+    data = fetch_data(f'{year}/day{day}/data.txt')
+
+    return [test_data, data]
